@@ -137,6 +137,14 @@ matchers = {
 		return true
 	end;
 
+	should_not_error = function(f)
+		local err, msg = pcall(f)
+		if err then
+			return true
+		end
+		return false, "expecting no error but received: " .. msg
+	end;
+
 	should_match = function(value, pattern) 
 		if type(value) ~= 'string' then
 			return false, "type error, should_match expecting target as string"
